@@ -32,6 +32,10 @@ export default class NoteTakingApp extends LightningElement {
         return !(this.noteRecord && this.noteRecord.Name && this.noteRecord.Note_Description__c)
     }
 
+    get ModalName(){
+        return this.selectedRecordId ? 'Update Note' : 'Save Note'
+    }
+
     @wire(getNotes)
     noteListInfo({data, error}){
         if(data){
@@ -54,6 +58,7 @@ export default class NoteTakingApp extends LightningElement {
     closeModalHandler(){
         this.showModal = false
         this.noteRecord = DEFAULT_NOTE_FORM  // it will remove all text from modal, we are reassigning empty value again as it was empty at the time of creation please see line number 3-6
+        this.selectedRecordId = null
     }
     changeHandler(event){
         const {name, value} = event.target;
