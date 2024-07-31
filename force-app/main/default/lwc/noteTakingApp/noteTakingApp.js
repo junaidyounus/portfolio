@@ -10,6 +10,7 @@ export default class NoteTakingApp extends LightningElement {
     showModal = false
     noteRecord = DEFAULT_NOTE_FORM
     noteList = []
+    selectedRecordId
     formats = [
         'font',
         'size',
@@ -80,5 +81,16 @@ export default class NoteTakingApp extends LightningElement {
         if(elem){
          elem.showToast(message, variant)  // showToast coming from notification component through @api
         }
+    }
+
+    editNoteHandler(event){
+        const {recordid} = event.target.dataset
+        const noteRecord = this.noteList.find(item=>item.Id === recordid)
+        this.noteRecord = {
+            Name:noteRecord.Name,
+            Note_Description__c:noteRecord.Note_Description__c
+        }
+            this.selectedRecordId = recordid
+            this.showModal = true
     }
 }
