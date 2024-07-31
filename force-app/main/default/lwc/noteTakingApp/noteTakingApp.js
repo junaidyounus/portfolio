@@ -2,6 +2,7 @@ import { LightningElement, wire} from 'lwc';
 import createNoteRecord from '@salesforce/apex/NoteTakingController.createNoteRecord';
 import getNotes from '@salesforce/apex/NoteTakingController.getNotes';
 import updateNoteRecord from '@salesforce/apex/NoteTakingController.updateNoteRecord';
+import {refreshApex} from '@salesforce/apex'
 
 const DEFAULT_NOTE_FORM = {
     Name:"",
@@ -12,6 +13,7 @@ export default class NoteTakingApp extends LightningElement {
     noteRecord = DEFAULT_NOTE_FORM
     noteList = []
     selectedRecordId
+    wiredNoteResult
     formats = [
         'font',
         'size',
@@ -38,7 +40,9 @@ export default class NoteTakingApp extends LightningElement {
     }
 
     @wire(getNotes)
-    noteListInfo({data, error}){
+    noteListInfo(result){
+        this.wiredNoteResult = result
+        const {data, error} = result
         if(data){
             console.log("Data of Notes", JSON.stringify(data));
             this.noteList = data.map(item=>{
@@ -68,9 +72,9 @@ export default class NoteTakingApp extends LightningElement {
 
     formSubmitHandler(event){
         event.preventDefault(); // Form will refresh automatically
-       // console.log("this.noteRecord", JSON.stringify(this.noteRecord));
+        console.log("this.noteRecord", JSON.stringify(this.noteRecord));
        if(this.selectedRecordId){
-        this.updateNote()
+        this.updateNote(this.selectedRecordId)
        }else{
         this.createNote()
        }
@@ -81,7 +85,10 @@ export default class NoteTakingApp extends LightningElement {
     createNote(){
         createNoteRecord({title:this.noteRecord.Name, description:this.noteRecord.Note_Description__c}).then(()=>{
             this.showModal = false
+            this.selectedRecordId = null
             this.showToastMsg("Note Created Successfully!!", "success")
+            this.refresh()
+            
         }).catch(error=>{
             console.error("error", error.message.body);
             this.showToastMsg(error.message.body, "error")
@@ -109,13 +116,18 @@ export default class NoteTakingApp extends LightningElement {
 
     updateNote(noteId){
         const {Name, Note_Description__c} = this.noteRecord
-        updateNoteRecord({noteId, title:Name, description:Note_Description__c}).then(()=>{
+        updateNoteRecord({"noteId":noteId, "title":Name, "description":Note_Description__c}).then(()=>{
             this.showModal = false
+            this.selectedRecordId = null
             this.showToastMsg("Note Updated Successfully!!", "success")
-
+            this.refresh()
         }).catch(error=>{
             console.error("Note updating error", error);
             this.showToastMsg(error.message.body, "error")
         })
+    }
+
+    refresh(){
+        return refreshApex(this.wiredNoteResult)
     }
 }
