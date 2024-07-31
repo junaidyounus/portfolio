@@ -1,6 +1,7 @@
 import { LightningElement, wire} from 'lwc';
 import createNoteRecord from '@salesforce/apex/NoteTakingController.createNoteRecord';
 import getNotes from '@salesforce/apex/NoteTakingController.getNotes';
+import updateNoteRecord from '@salesforce/apex/NoteTakingController.updateNoteRecord';
 
 const DEFAULT_NOTE_FORM = {
     Name:"",
@@ -68,7 +69,13 @@ export default class NoteTakingApp extends LightningElement {
     formSubmitHandler(event){
         event.preventDefault(); // Form will refresh automatically
        // console.log("this.noteRecord", JSON.stringify(this.noteRecord));
-       this.createNote()
+       if(this.selectedRecordId){
+        this.updateNote()
+       }else{
+        this.createNote()
+       }
+       
+       
     }
 
     createNote(){
@@ -97,5 +104,18 @@ export default class NoteTakingApp extends LightningElement {
         }
             this.selectedRecordId = recordid
             this.showModal = true
+    }
+
+
+    updateNote(noteId){
+        const {Name, Note_Description__c} = this.noteRecord
+        updateNoteRecord({noteId, title:Name, description:Note_Description__c}).then(()=>{
+            this.showModal = false
+            this.showToastMsg("Note Updated Successfully!!", "success")
+
+        }).catch(error=>{
+            console.error("Note updating error", error);
+            this.showToastMsg(error.message.body, "error")
+        })
     }
 }
