@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Certification_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Certification Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Master of Container Logistics</fullName>
+                <default>false</default>
+                <label>Master of Container Logistics</label>
+            </value>
+            <value>
+                <fullName>Certified Shipping Container Safety Inspector</fullName>
+                <default>false</default>
+                <label>Certified Shipping Container Safety Inspector</label>
+            </value>
+            <value>
+                <fullName>Advance Container Staking and Storage Expert</fullName>
+                <default>false</default>
+                <label>Advance Container Staking and Storage Expert</label>
+            </value>
+            <value>
+                <fullName>Container Loading Efficiency Strategist</fullName>
+                <default>false</default>
+                <label>Container Loading Efficiency Strategist</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

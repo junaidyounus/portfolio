@@ -1,0 +1,10 @@
+<template>
+    <lightning-datatable
+        key-field="Id"
+        data={comments}
+        columns={columns}
+        selected-rows={selectedRows}
+        onrowselection={handleRowSelection}>
+    </lightning-datatable>
+    <lightning-button label="Show Selected Comments" onclick={handleShowSelected}></lightning-button>
+</template>

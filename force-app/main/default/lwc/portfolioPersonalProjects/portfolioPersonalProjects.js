@@ -43,4 +43,3 @@ export default class PortfolioPersonalProjects extends LightningElement {
     
     ]
 }
-

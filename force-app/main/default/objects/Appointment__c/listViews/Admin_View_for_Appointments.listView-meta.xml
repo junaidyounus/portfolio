@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Admin_View_for_Appointments</fullName>
+    <columns>NAME</columns>
+    <columns>Patient__c</columns>
+    <columns>Status__c</columns>
+    <columns>AppointmentType__c</columns>
+    <columns>AppointmentDateTime__c</columns>
+    <columns>Doctor__c</columns>
+    <filterScope>Mine</filterScope>
+    <label>Admin View for Appointments</label>
+</ListView>

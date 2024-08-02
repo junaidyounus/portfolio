@@ -1,0 +1,23 @@
+<template>
+     <lightning-card title="Accounts Information">
+        <div class="slds-p-around_medium">
+<template if:true={accounts.data}>
+
+    <template for:each={accounts.data} for:item="account">
+            <div class="slds-box slds-box_xx-small" key={account.id}>
+                <p><strong>Name:</strong> {account.Name}</p>
+                <p><strong>BillingStreet:</strong> {account.BillingStreet}</p>
+                <p><strong>BillingState:</strong> {account.BillingState}</p>
+                <p><strong>BillingPostalCode:</strong> {account.BillingPostalCode}</p>
+                <p><strong>BillingCountry:</strong> {account.BillingCountry}</p>
+                <p><strong>BillingCity:</strong> {account.BillingCity}</p>
+            </div>
+    </template>
+
+</template>
+        </div>
+    </lightning-card>
+    
+
+   
+</template>

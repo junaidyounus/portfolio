@@ -1,0 +1,37 @@
+<template>
+    <lightning-card title="Parent-Child Communication">
+        <div class="slds-var-m-around_medium">
+    <lightning-button variant="brand" onclick={childOneClicked} label="Show Child One"></lightning-button>
+    <div class="slds-var-m-bottom_medium"></div>
+    <lightning-button variant="brand" onclick={childTwoClicked} label="Show Child Two"></lightning-button>
+    <div class="slds-var-m-bottom_medium"></div>
+    <lightning-button variant="brand" onclick={childThreeClicked} label="Show Child Three"></lightning-button>
+    <div class="slds-var-m-bottom_medium"></div>
+    <lightning-button variant="brand" onclick={resetHandler} label="Clear"></lightning-button>
+    <h1>{msg}</h1>  
+    
+    <!-- Child One -->
+            <div>Message Received - {message}</div>
+
+    <lightning-card title="Child Communication One">
+    
+    <c-child-one child-one-value={childOne} ontext={showHandler}></c-child-one>
+
+    </lightning-card>
+
+        <!-- Child Two -->
+        <lightning-card title="Child Communication Two">
+            <c-child-two child-two-value={childTwo} ontext={showHandler} ></c-child-two>
+            </lightning-card>
+
+
+        <!-- Child Three -->
+    <lightning-card title="Child Communication Three">
+        <c-child-three child-three-value={childThree} ontext={showHandler}></c-child-three>
+        </lightning-card>
+
+
+    </div>
+    </lightning-card>
+        
+</template>
