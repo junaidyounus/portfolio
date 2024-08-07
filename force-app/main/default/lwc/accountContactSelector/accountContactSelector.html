@@ -1,5 +1,5 @@
 <template>
-    <lightning-card title="Select Account and Contacts">
+    <lightning-card title="Select Account and Contact">
         <div class="slds-m-around_medium">
             <lightning-combobox
                 name="account"
@@ -10,7 +10,7 @@
                 onchange={handleAccountChange}>
             </lightning-combobox>
         </div>
-        <template if:true={showContacts}>
+        <!-- <template if:true={showContacts}>
             <div class="slds-m-around_medium">
                 <lightning-dual-listbox
                     name="contact"
@@ -22,6 +22,18 @@
                     value={selectedContacts}
                     onchange={handleContactChange}>
                 </lightning-dual-listbox>
+            </div>
+        </template> -->
+        <template if:true={showContacts}>
+            <div class="slds-m-around_medium">
+                <lightning-combobox
+                    name="contact"
+                    label="Select Contact"
+                    value={selectedContact}
+                    placeholder="Choose a Contact"
+                    options={contactOptions}
+                    onchange={handleContactChange}>
+                </lightning-combobox>
             </div>
         </template>
     </lightning-card>

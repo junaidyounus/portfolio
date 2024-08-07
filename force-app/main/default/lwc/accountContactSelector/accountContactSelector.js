@@ -1,13 +1,13 @@
-import { LightningElement, track, wire } from 'lwc';
+import { LightningElement, wire } from 'lwc';
 import getAccounts from '@salesforce/apex/AccountContactController.getAccounts';
 import getContacts from '@salesforce/apex/AccountContactController.getContacts';
 
 export default class AccountContactSelector extends LightningElement {
-    @track accountOptions = [];
-    @track contactOptions = [];
-    @track selectedAccount;
-    @track selectedContacts = [];
-    @track showContacts = false;
+    accountOptions = [];
+    contactOptions = [];
+    selectedAccount;
+    selectedContacts = [];
+    showContacts = false;
 
     @wire(getAccounts)
     wiredAccounts({ error, data }) {
